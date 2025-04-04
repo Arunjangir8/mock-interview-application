@@ -98,7 +98,7 @@ const Navbar = () => {
                         <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-5 p-4">
                             <p onClick={()=>navigate("my-profile")} className="hover:text-black cursor-pointer">My Profile</p>
                             <p onClick={()=>navigate("my-interviews")} className="hover:text-black cursor-pointer">My Interviews</p>
-                            <p onClick={()=>setToken(false)} className="hover:text-black cursor-pointer">Logout</p>
+                            <p onClick={()=>{navigate("login") ;setToken(false)}} className="hover:text-black cursor-pointer">Logout</p>
                         </div>
                     </div>
                 </div>

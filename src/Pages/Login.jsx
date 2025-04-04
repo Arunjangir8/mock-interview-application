@@ -1,23 +1,22 @@
 import { useState } from "react";
-// import { signup, login } from "../assets/pexels-mikhail-nilov-6707626.jpg";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ username: "", email: "", password: "" });
   const [LoginData, setLoginData] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const switchForm = () => {
     setIsLogin(!isLogin);
   };
 
   const HandalSubmit = async (e) => {
-    
+    e.preventDefault()
   };
 
   const HandelLogin = async (e) => {
-    
+    e.preventDefault()
   };
 
   return (

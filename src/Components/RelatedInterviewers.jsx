@@ -1,20 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AppContext } from "../context/AppContext";
+import { useNavigate } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom'
-import { AppContext } from '../context/AppContext'
+function RelatedInterviewers({intid,Speciality}) {
+    const navigate =useNavigate()
 
-function InterviewersCard() {
-  const navigate = useNavigate()
-  const { interviewer } = useContext(AppContext)
+    const { interviewer = [] } = useContext(AppContext);
+    const [relInt,setrelInt]=useState([])
+
+    useEffect(()=>{
+        if (interviewer.length>0 && Speciality){
+            const InterviewersData= interviewer.filter((item)=>item.Speciality===Speciality && Number(item.id) !== Number(intid))
+            console.log(InterviewersData)
+            setrelInt(InterviewersData)
+        }
+    },[interviewer,Speciality,intid])
+
+
   return (
     <div className='flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10' id='interviewers'>
       <h1 className='text-3xl font-medium'>Top Interviewers To Book</h1>
       <p className='sm:w-1/3 text-center text-sm'>simply browse through our extensive list of interviewers</p>
       <div className='w-full grid grid-cols-auto gap-6 pt-5 gap-y-6 px-3 sm:px-0 lg:px-44'>
-        {interviewer.slice(13, 21).map((item) => (
+        {relInt.map((item) => (
           <div
             key={item.id}
-            onClick={() => {navigate(`/appointment/${item.id}`); scrollTo(0,0)}}
+            onClick={() => navigate(`/appointment/${item.id}`)}
             className="border border-rose-100 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
           >
             <div className="relative">
@@ -37,7 +48,8 @@ function InterviewersCard() {
       </div>
       <button onClick={() => { navigate("/interviewer"); scrollTo(0, 0) }} className='text-center w-44 sm:w-52 h-12 rounded-full bg-[#e8d6d6] shadow-lg shadow-[#be5959]/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-[#be5959]/70 hover:-translate-y-0.5 active:shadow-md active:shadow-[#be5959]/50 active:translate-y-0.5 my-6 lg:my-7 text-gray-600'>More</button>
     </div>
+    
   )
 }
 
-export default InterviewersCard
+export default RelatedInterviewers

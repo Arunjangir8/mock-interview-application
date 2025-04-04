@@ -33,7 +33,7 @@ function Interviewer() {
           filteredInterviewers.map((item) => (
             <div
               key={item.id}
-              onClick={() => navigate(`/appointment/${item.id}`)}
+              onClick={() => {navigate(`/appointment/${item.id}`); scrollTo(0,0)}}
               className="border border-rose-100 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
             >
               <div className="relative">

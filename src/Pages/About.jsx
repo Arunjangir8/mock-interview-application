@@ -10,6 +10,7 @@ function About() {
 
   const goToHome = () => {
     navigate("/interviewer"); 
+    scrollTo(0,0)
   };
   
   return (
