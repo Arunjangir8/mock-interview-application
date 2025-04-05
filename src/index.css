@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* You can put this in index.css or tailwind.config.js if needed */
+
+.nav-link {
+    @apply px-3 py-2 text-gray-700 hover:text-blue-500 font-medium transition duration-200;
+  }
+  
+  .mobile-link {
+    @apply block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-500 rounded-md font-medium transition;
+  }
+  
+  .dropdown-item {
+    @apply px-4 py-2 hover:bg-blue-50 hover:text-blue-500 rounded-md transition-colors duration-200;
+  }
+  
+

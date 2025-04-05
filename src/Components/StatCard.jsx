@@ -44,7 +44,7 @@ function StatCard({ mainheading, desHeading, initialCount = 0, ending }) {
     return (
       <div ref={cardRef} className="stat-item">
         <h3 className="text-white text-4xl sm:text-5xl mb-2 font-bold">{count}{ending}</h3>
-        <p className="text-lg sm:text-xl opacity-90">{desHeading}</p>
+        <p className="text-lg sm:text-xl opacity-90 text-white">{desHeading}</p>
       </div>
     );
   }

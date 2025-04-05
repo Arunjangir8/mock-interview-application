@@ -60,54 +60,91 @@ function Appointment() {
   }, [info]);
 
   return (
-    <div className="w-[100vw] mx-auto">
+    <div className="w-full max-w-7xl mx-auto px-4 mt-32 mb-16">
       {info ? (
-        <div className="flex flex-col sm:flex-row gap-4 w-[70vw] mt-32">
-          <div>
-            <img className="w-full sm:max-w-72 rounded-lg" src={info.image} alt={info.name || "Interviewer Image"} />
+        <div className="flex flex-col sm:flex-row gap-6">
+          {/* Left - Image */}
+          <div className="w-full sm:w-64">
+            <img
+              src={info.image}
+              alt={info.name || "Interviewer"}
+              className="w-full rounded-xl shadow-md"
+            />
           </div>
 
-          <div className="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-1 mt-[-80px] sm:mt-0">
-            <p className="flex items-center gap-2 text-2xl font-medium text-gray-900">{info.name}</p>
-            <div className="flex items-center gap-2 text-sm mt-1 text-gray-600">
+          {/* Right - Info */}
+          <div className="flex-1 bg-white border border-gray-200 rounded-xl shadow-sm p-6 lg:pr-60">
+            <h2 className="text-2xl font-semibold text-gray-800">{info.name}</h2>
+            <div className="flex items-center gap-2 mt-2 text-sm text-gray-600">
               <p>{info.Speciality}</p>
-              <button className="my-0.5 px-2 border text-xs rounded-full">{info.experience} Year</button>
+              <span className="px-2 py-0.5 text-xs border border-gray-300 rounded-full">
+                {info.experience} Year
+              </span>
             </div>
-            <p className="text-sm text-gray-600 max-w-[700px] mt-1">{info.about}</p>
-            <p className="text-gray-500 mt-4 font-medium">Appointment Fee: $50</p>
+            <p className="mt-3 text-gray-600 text-sm leading-relaxed">{info.about}</p>
+            <p className="mt-4 text-[#BE5959] font-semibold">Appointment Fee: $50</p>
           </div>
         </div>
       ) : (
-        <p>Loading interviewer details...</p>
+        <p className="text-center text-gray-600 mt-10">Loading interviewer details...</p>
       )}
 
-      <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
-        <p>Booking Slots</p>
-        <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
-          {slot.length > 0 ? slot.map((item, index) => (
-            <div key={index} onClick={() => setSlotIndex(index)}
-              className={`text-center py-6 min-w-16 rounded-full cursor-pointer 
-                ${slotIndex === index ? "bg-[#be5959] text-white" : "border border-gray-200"}`}>
-              <p>{item[0] && DaysOfWeek[item[0].dateTime.getDay()]}</p>
-              <p>{item[0] && item[0].dateTime.getDate()}</p>
-            </div>
-          )) : <p>No slots available</p>}
+      {/* Slots */}
+      <div className="mt-12 lg:ml-80 lg:w-[50vw]">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">Booking Slots</h3>
+
+        {/* Day Picker */}
+        <div className="flex gap-3 overflow-x-auto pb-2">
+          {slot.length > 0 ? (
+            slot.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => setSlotIndex(index)}
+                className={`min-w-16 px-4 py-4 text-center rounded-full cursor-pointer text-sm font-medium transition-all ${
+                  slotIndex === index
+                    ? "bg-[#BE5959] text-white shadow-md"
+                    : "border border-gray-300 text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                <p>{item[0] && DaysOfWeek[item[0].dateTime.getDay()]}</p>
+                <p>{item[0] && item[0].dateTime.getDate()}</p>
+              </div>
+            ))
+          ) : (
+            <p>No slots available</p>
+          )}
         </div>
-        <div className="flex items-center gap-3 w-full overflow-x-scroll mt-4">
-          {slot.length > 0 && slot[slotIndex].map((item, index) => (
-            <p key={index} onClick={() => setSlotTime(item.time)}
-              className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer mx-2 
-              ${item.time === slotTime ? "bg-[#be5959] text-white" : "text-gray-400 border border-gray-300"}`}>
-              {item.time.toLowerCase()}
-            </p>
-          ))}
+
+        {/* Time Picker */}
+        <div className="flex gap-3 overflow-x-auto mt-6">
+          {slot.length > 0 &&
+            slot[slotIndex]?.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => setSlotTime(item.time)}
+                className={`px-5 py-2 text-sm rounded-full border transition-all ${
+                  item.time === slotTime
+                    ? "bg-[#BE5959] text-white shadow"
+                    : "border-gray-300 text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                {item.time.toLowerCase()}
+              </button>
+            ))}
         </div>
-        <button className="text-center w-44 sm:w-52 h-12 rounded-full bg-[#be5959] shadow-lg transition-all duration-300 
-          hover:shadow-xl hover:-translate-y-0.5 active:shadow-md active:translate-y-0.5 my-6 lg:my-7 text-white">
-          Book an Appointment
-        </button>
+
+        {/* Book Button */}
+        <div className="mt-8">
+          <button className="w-full sm:w-60 h-12 bg-[#BE5959] text-white font-medium rounded-full shadow-lg transition hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0.5">
+            Book an Appointment
+          </button>
+        </div>
       </div>
-      <RelatedInterviewers intid={intid} Speciality={info?.Speciality} />
+
+      {/* Related Interviewers */}
+      <div className="mt-16">
+        <RelatedInterviewers intid={intid} Speciality={info?.Speciality} />
+      </div>
     </div>
   );
 }
