@@ -17,12 +17,11 @@ const App = () => {
     <div className=''>
       <Navbar/>
       <Routes>
-        <Route path='/home' element={<Home/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path='/interviewer' element={<Interviewer/>}/>
         <Route path='/interviewer/:speciality' element={<Interviewer/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/about' element={<About/>}/>
-        <Route path='/contact' element={<Contact/>}/>
         <Route path='/my-profile' element={<Myprofile/>}/>
         <Route path='/my-interviews' element={<Myinterviews/>}/>
         <Route path='/appointment/:intid' element={<Apointment/>}/>

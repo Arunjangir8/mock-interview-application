@@ -44,7 +44,7 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/home" className="nav-link text-[#374151] hover:text-[#BE5959]">Home</a>
+            <a href="/" className="nav-link text-[#374151] hover:text-[#BE5959]">Home</a>
             <a href="/interviewer" className="nav-link text-[#374151] hover:text-[#BE5959]">All Interviewers</a>
             <a href="/my-interviews" className="nav-link text-[#374151] hover:text-[#BE5959]">Events</a>
             <a href="/about" className="nav-link text-[#374151] hover:text-[#BE5959]">About</a>
