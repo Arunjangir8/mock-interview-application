@@ -61,7 +61,7 @@ function Appointment() {
     
     try {
       // Send ISO string format instead of locale string
-      await axios.post("http://localhost:8000/appointments", {
+      await axios.post("https://mock-interview-application-backend.onrender.com/appointments", {
         userId,
         interviewerId: parseInt(intid),
         dateTime: selectedSlot.dateTime.toISOString(),

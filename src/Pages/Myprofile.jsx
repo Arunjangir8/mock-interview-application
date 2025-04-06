@@ -11,7 +11,7 @@ function Myprofile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/profile/${userId}`);
+        const res = await axios.get(`https://mock-interview-application-backend.onrender.com/${userId}`);
         setUserdata(res.data);
       } catch (err) {
         console.error("Failed to fetch profile", err);
@@ -25,7 +25,7 @@ function Myprofile() {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:8000/profile/${userId}`, userdata);
+      await axios.put(`https://mock-interview-application-backend.onrender.com/${userId}`, userdata);
       setisedit(false);
     } catch (err) {
       console.error("Failed to update profile", err);

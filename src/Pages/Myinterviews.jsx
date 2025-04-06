@@ -13,7 +13,7 @@ function Myinterviews() {
 
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/appointments/${userId}`);
+        const res = await axios.get(`https://mock-interview-application-backend.onrender.com/${userId}`);
         setAppointments(res.data);
       } catch (error) {
         console.error("Error fetching appointments:", error);
@@ -25,7 +25,7 @@ function Myinterviews() {
 
   const handleCancel = async (appointmentId) => {
     try {
-      await axios.delete(`http://localhost:8000/appointments/${appointmentId}`);
+      await axios.delete(`https://mock-interview-application-backend.onrender.com/${appointmentId}`);
       setAppointments((prev) => prev.filter((item) => item.id !== appointmentId));
     } catch (error) {
       console.error("Failed to cancel appointment:", error);
