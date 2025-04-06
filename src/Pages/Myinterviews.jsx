@@ -13,7 +13,7 @@ function Myinterviews() {
 
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get(`https://mock-interview-application-backend.onrender.com/appointments/user/${userId}`);
+        const res = await axios.get(`http://localhost:8000/appointments/${userId}`);
         setAppointments(res.data);
       } catch (error) {
         console.error("Error fetching appointments:", error);
@@ -25,7 +25,7 @@ function Myinterviews() {
 
   const handleCancel = async (appointmentId) => {
     try {
-      await axios.delete(`https://mock-interview-application-backend.onrender.com/appointments/${appointmentId}`);
+      await axios.delete(`http://localhost:8000/appointments/${appointmentId}`);
       setAppointments((prev) => prev.filter((item) => item.id !== appointmentId));
     } catch (error) {
       console.error("Failed to cancel appointment:", error);
@@ -42,13 +42,13 @@ function Myinterviews() {
       <p className='pb-3 mt-12 font-medium text-zinc-700 border-b-2'>My Appointments</p>
       <div className="mt-6 space-y-6">
         {appointments.length > 0 ? (
-          appointments.map((item) => {
+          appointments.map((item, index) => {
             const interviewerDetails = getInterviewerDetails(item.interviewerId);
 
             return (
               <div
                 className='flex flex-col sm:flex-row gap-4 sm:gap-6 py-4 border-b-2'
-                key={item.id}
+                key={index}
               >
                 <div className="flex justify-center sm:block">
                   <img
@@ -79,6 +79,8 @@ function Myinterviews() {
                   >
                     Cancel Appointment
                   </button>
+
+
                 </div>
               </div>
             );
