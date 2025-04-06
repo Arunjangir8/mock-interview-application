@@ -55,18 +55,17 @@ function Appointment() {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user?.id;
     if (!slotTime || !userId) return alert("Please select a time slot and ensure you're logged in");
-  
+
     const selectedSlot = slot[slotIndex]?.find((s) => s.time === slotTime);
     if (!selectedSlot) return alert("Invalid time slot selected.");
-    
+
     try {
-      // Send ISO string format instead of locale string
       await axios.post("https://mock-interview-application-backend.onrender.com/appointments", {
         userId,
         interviewerId: parseInt(intid),
         dateTime: selectedSlot.dateTime.toISOString(),
       });
-  
+
       alert("Appointment booked successfully!");
       setSlotTime("");
     } catch (error) {
