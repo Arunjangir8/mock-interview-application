@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import RelatedInterviewers from "../Components/RelatedInterviewers";
+import axios from "axios";
 
 function Appointment() {
   const { intid } = useParams();
@@ -12,26 +13,19 @@ function Appointment() {
   const [slotTime, setSlotTime] = useState("");
   const DaysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-  const getAvailableSlots = async () => {
-    let today = new Date();
-    let newSlots = [];
+  const getAvailableSlots = () => {
+    const today = new Date();
+    const newSlots = [];
 
-    for (let i = 0; i < 7; i++) {
-      let currentDate = new Date(today);
+    for (let i = 1; i <= 7; i++) {
+      const currentDate = new Date(today);
       currentDate.setDate(today.getDate() + i);
+      currentDate.setHours(10, 0, 0, 0);
 
-      let endTime = new Date(currentDate);
+      const endTime = new Date(currentDate);
       endTime.setHours(21, 0, 0, 0);
 
-      if (today.getDate() === currentDate.getDate()) {
-        currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10);
-        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0);
-      } else {
-        currentDate.setHours(10);
-        currentDate.setMinutes(0);
-      }
-
-      let timeSlots = [];
+      const timeSlots = [];
       while (currentDate < endTime) {
         timeSlots.push({
           dateTime: new Date(currentDate),
@@ -54,29 +48,45 @@ function Appointment() {
   }, [interviewer, intid]);
 
   useEffect(() => {
-    if (info) {
-      getAvailableSlots();
-    }
+    if (info) getAvailableSlots();
   }, [info]);
+
+  const bookAppointment = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?.id;
+    if (!slotTime || !userId) return alert("Please select a time slot and ensure you're logged in");
+  
+    const selectedSlot = slot[slotIndex]?.find((s) => s.time === slotTime);
+    if (!selectedSlot) return alert("Invalid time slot selected.");
+    
+    try {
+      // Send ISO string format instead of locale string
+      await axios.post("http://localhost:8000/appointments", {
+        userId,
+        interviewerId: parseInt(intid),
+        dateTime: selectedSlot.dateTime.toISOString(),
+      });
+  
+      alert("Appointment booked successfully!");
+      setSlotTime("");
+    } catch (error) {
+      console.error("Booking failed:", error);
+      alert("Failed to book appointment");
+    }
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 mt-32 mb-16">
       {info ? (
         <div className="flex flex-col sm:flex-row gap-6">
-          {/* Left - Image */}
           <div className="w-full sm:w-64">
-            <img
-              src={info.image}
-              alt={info.name || "Interviewer"}
-              className="w-full rounded-xl shadow-md"
-            />
+            <img src={info.image} alt={info.name || "Interviewer"} className="w-full rounded-xl shadow-md" />
           </div>
 
-          {/* Right - Info */}
           <div className="flex-1 bg-white border border-gray-200 rounded-xl shadow-sm p-6 lg:pr-60">
             <h2 className="text-2xl font-semibold text-gray-800">{info.name}</h2>
             <div className="flex items-center gap-2 mt-2 text-sm text-gray-600">
-              <p>{info.Speciality}</p>
+              <p>{info.speciality}</p>
               <span className="px-2 py-0.5 text-xs border border-gray-300 rounded-full">
                 {info.experience} Year
               </span>
@@ -135,7 +145,10 @@ function Appointment() {
 
         {/* Book Button */}
         <div className="mt-8">
-          <button className="w-full sm:w-60 h-12 bg-[#BE5959] text-white font-medium rounded-full shadow-lg transition hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0.5">
+          <button
+            onClick={bookAppointment}
+            className="w-full sm:w-60 h-12 bg-[#BE5959] text-white font-medium rounded-full shadow-lg transition hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0.5"
+          >
             Book an Appointment
           </button>
         </div>
