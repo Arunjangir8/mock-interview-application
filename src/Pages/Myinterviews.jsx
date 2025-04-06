@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { interviewer } from '../assets/asset';
+import { getAppointmentsByUserId, deleteAppointment } from '../api.js';
 
 function Myinterviews() {
   const [appointments, setAppointments] = useState([]);
@@ -8,12 +8,11 @@ function Myinterviews() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user?.id;
-
     if (!userId) return;
 
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/appointments/${userId}`);
+        const res = await getAppointmentsByUserId(userId);
         setAppointments(res.data);
       } catch (error) {
         console.error("Error fetching appointments:", error);
@@ -25,7 +24,7 @@ function Myinterviews() {
 
   const handleCancel = async (appointmentId) => {
     try {
-      await axios.delete(`http://localhost:8000/appointments/${appointmentId}`);
+      await deleteAppointment(appointmentId);
       setAppointments((prev) => prev.filter((item) => item.id !== appointmentId));
     } catch (error) {
       console.error("Failed to cancel appointment:", error);
@@ -79,8 +78,6 @@ function Myinterviews() {
                   >
                     Cancel Appointment
                   </button>
-
-
                 </div>
               </div>
             );

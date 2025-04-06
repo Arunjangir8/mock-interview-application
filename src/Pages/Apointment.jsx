@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import RelatedInterviewers from "../Components/RelatedInterviewers";
-import axios from "axios";
+import { bookAppointmentAPI } from "../api";
 
 function Appointment() {
   const { intid } = useParams();
@@ -29,7 +29,10 @@ function Appointment() {
       while (currentDate < endTime) {
         timeSlots.push({
           dateTime: new Date(currentDate),
-          time: currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          time: currentDate.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
         });
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
@@ -42,7 +45,9 @@ function Appointment() {
 
   useEffect(() => {
     if (interviewer?.length > 0) {
-      const interviewersInfo = interviewer.find((item) => item.id === parseInt(intid));
+      const interviewersInfo = interviewer.find(
+        (item) => item.id === parseInt(intid)
+      );
       setInterInfo(interviewersInfo);
     }
   }, [interviewer, intid]);
@@ -54,19 +59,19 @@ function Appointment() {
   const bookAppointment = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user?.id;
-    if (!slotTime || !userId) return alert("Please select a time slot and ensure you're logged in");
-  
+    if (!slotTime || !userId)
+      return alert("Please select a time slot and ensure you're logged in");
+
     const selectedSlot = slot[slotIndex]?.find((s) => s.time === slotTime);
     if (!selectedSlot) return alert("Invalid time slot selected.");
-    
+
     try {
-      // Send ISO string format instead of locale string
-      await axios.post("http://localhost:8000/appointments", {
+      await bookAppointmentAPI({
         userId,
         interviewerId: parseInt(intid),
         dateTime: selectedSlot.dateTime.toISOString(),
       });
-  
+
       alert("Appointment booked successfully!");
       setSlotTime("");
     } catch (error) {
@@ -80,7 +85,11 @@ function Appointment() {
       {info ? (
         <div className="flex flex-col sm:flex-row gap-6">
           <div className="w-full sm:w-64">
-            <img src={info.image} alt={info.name || "Interviewer"} className="w-full rounded-xl shadow-md" />
+            <img
+              src={info.image}
+              alt={info.name || "Interviewer"}
+              className="w-full rounded-xl shadow-md"
+            />
           </div>
 
           <div className="flex-1 bg-white border border-gray-200 rounded-xl shadow-sm p-6 lg:pr-60">
@@ -92,16 +101,22 @@ function Appointment() {
               </span>
             </div>
             <p className="mt-3 text-gray-600 text-sm leading-relaxed">{info.about}</p>
-            <p className="mt-4 text-[#BE5959] font-semibold">Appointment Fee: $50</p>
+            <p className="mt-4 text-[#BE5959] font-semibold">
+              Appointment Fee: $50
+            </p>
           </div>
         </div>
       ) : (
-        <p className="text-center text-gray-600 mt-10">Loading interviewer details...</p>
+        <p className="text-center text-gray-600 mt-10">
+          Loading interviewer details...
+        </p>
       )}
 
       {/* Slots */}
       <div className="mt-12 lg:ml-80 lg:w-[50vw]">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Booking Slots</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          Booking Slots
+        </h3>
 
         {/* Day Picker */}
         <div className="flex gap-3 overflow-x-auto pb-2">

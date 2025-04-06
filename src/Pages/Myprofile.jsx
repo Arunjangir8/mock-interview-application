@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { assets } from '../assets/asset';
-import axios from 'axios';
+import { getUserProfile, updateUserProfile } from '../api.js';
 
 function Myprofile() {
   const [userdata, setUserdata] = useState(null);
@@ -11,7 +11,7 @@ function Myprofile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/profile/${userId}`);
+        const res = await getUserProfile(userId);
         setUserdata(res.data);
       } catch (err) {
         console.error("Failed to fetch profile", err);
@@ -25,7 +25,7 @@ function Myprofile() {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:8000/profile/${userId}`, userdata);
+      await updateUserProfile(userId, userdata);
       setisedit(false);
     } catch (err) {
       console.error("Failed to update profile", err);

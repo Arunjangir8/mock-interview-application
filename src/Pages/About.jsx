@@ -161,7 +161,7 @@ function About() {
               Start Practicing
             </button>
             <button
-              onClick={() => { navigate("/home"); scrollTo(0, 0); }}
+              onClick={() => { navigate("/"); scrollTo(0, 0); }}
               className="px-8 py-3 rounded-full border-2 border-gray-300 text-gray-700 font-medium transition-all duration-300 hover:border-gray-400 hover:-translate-y-0.5"
             >
               Learn More
