@@ -171,7 +171,7 @@ function Appointment() {
 
       {/* Related Interviewers */}
       <div className="mt-16">
-        <RelatedInterviewers intid={intid} Speciality={info?.Speciality} />
+        <RelatedInterviewers intid={intid} Speciality={info?.speciality} />
       </div>
     </div>
   );

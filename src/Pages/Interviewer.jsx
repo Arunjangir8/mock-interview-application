@@ -45,7 +45,7 @@ function Interviewer() {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-64 object-cover rounded-t-2xl"
+                  className="w-full h-96 object-cover rounded-t-2xl"
                 />
                 <div className="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2 shadow">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
