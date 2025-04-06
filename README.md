@@ -74,14 +74,7 @@ npm install
 npm run dev
 ```
 
-## 🔐 Environment Variables
 
-Create a `.env` file in the **server/** directory with the following:
-
-```env
-DATABASE_URL=postgresql://your_user:your_password@localhost:5432/interviewdb
-JWT_SECRET=your_jwt_secret
-```
 
 ## 📌 Key Functionalities
 
@@ -94,9 +87,17 @@ JWT_SECRET=your_jwt_secret
 ## 📸 Screenshots
 
 ![Login Page](./readme/Screenshot%202025-04-06%20at%207.50.11 PM.png)
+
+
 ![Login Page](./readme/Screenshot%202025-04-06%20at%207.50.22 PM.png)
+
+
 ![Login Page](./readme/Screenshot%202025-04-06%20at%207.50.51 PM.png)
+
+
 ![Login Page](./readme//Screenshot%202025-04-06%20at%207.50.39 PM.png)
+
+
 ![Login Page](./readme/Screenshot%202025-04-06%20at%207.51.25 PM.png)
 
 ## 👨‍💻 Author
