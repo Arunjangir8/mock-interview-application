@@ -1,58 +1,55 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signup,login } from "../api";
-
+import { signup, login } from "../api";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
- 
   const switchForm = () => {
-    setMessage(""); 
+    setMessage("");
     setIsLogin(!isLogin);
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await signup(formData);
       setMessage(response.data.message);
-  
-      // ✅ Store token and user data in localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      
-      setTimeout(() => navigate("/"), 0); 
+      setTimeout(() => navigate("/"), 0);
     } catch (error) {
       setMessage(error.response?.data?.message || "Signup failed");
+    } finally {
+      setIsLoading(false);
     }
   };
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await login(loginData);
       setMessage(response.data.message);
-  
-      // ✅ Store token and user data in localStorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      
-      setTimeout(() => navigate("/"), 0); 
+      setTimeout(() => navigate("/"), 0);
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
+    } finally {
+      setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4 py-8">
       <div className="bg-white rounded-xl shadow-lg w-full max-w-md md:max-w-xl lg:max-w-2xl px-6 sm:px-12 py-10">
-        {/* Switchable Login/Register tabs */}
         <div className="flex mb-8">
           <div
             className={`flex-1 text-center py-2 cursor-pointer font-semibold text-lg ${isLogin ? "border-b-2 border-[#be5959] text-[#be5959]" : "text-gray-500"}`}
@@ -68,10 +65,8 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Message for errors or successful action */}
         {message && <p className="text-center text-red-500 mb-4">{message}</p>}
 
-        {/* Login Form */}
         {isLogin ? (
           <form onSubmit={handleLogin} className="space-y-4">
             <h2 className="text-xl font-bold text-center text-gray-800">Welcome Back</h2>
@@ -95,7 +90,21 @@ const Login = () => {
                 onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
               />
             </div>
-            <button type="submit" className="w-full bg-[#be5959] text-white py-3 rounded-lg font-semibold hover:bg-[#a24e4e] transition">Login</button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full py-3 rounded-lg font-semibold transition ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#be5959] hover:bg-[#a24e4e] text-white'}`}
+            >
+              {isLoading ? (
+                <div className="flex justify-center items-center space-x-2">
+                  <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                  </svg>
+                  <span>Loading...</span>
+                </div>
+              ) : "Login"}
+            </button>
             <p className="text-center text-sm text-gray-600">
               Don’t have an account?{" "}
               <span className="text-[#be5959] font-medium cursor-pointer underline" onClick={switchForm}>
@@ -104,7 +113,6 @@ const Login = () => {
             </p>
           </form>
         ) : (
-          // Register Form
           <form onSubmit={handleSignup} className="space-y-4">
             <h2 className="text-xl font-bold text-center text-gray-800">Create an Account</h2>
             <div>
@@ -137,7 +145,21 @@ const Login = () => {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
             </div>
-            <button type="submit" className="w-full bg-[#be5959] text-white py-3 rounded-lg font-semibold hover:bg-[#a24e4e] transition">Register</button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full py-3 rounded-lg font-semibold transition ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#be5959] hover:bg-[#a24e4e] text-white'}`}
+            >
+              {isLoading ? (
+                <div className="flex justify-center items-center space-x-2">
+                  <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                  </svg>
+                  <span>Loading...</span>
+                </div>
+              ) : "Register"}
+            </button>
             <p className="text-center text-sm text-gray-600">
               Already have an account?{" "}
               <span className="text-[#be5959] font-medium cursor-pointer underline" onClick={switchForm}>
