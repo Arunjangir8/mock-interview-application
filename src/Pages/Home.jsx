@@ -14,7 +14,7 @@ function Home() {
 
   return (
     <>
-      {/* Hero Section */}
+   
       <div className="grid grid-cols-1 lg:grid-cols-2 bg-[#F9FAFB] h-auto lg:h-screen">
         <div className="flex items-center py-32 lg:py-0">
           <div className="flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 w-full">
@@ -44,7 +44,7 @@ function Home() {
 
       <InterviewersCard />
 
-      {/* Programs Section */}
+      
       <section id="programs" className="bg-white py-16 lg:py-20 px-6 lg:px-[5%] text-center">
         <h2 className="text-3xl lg:text-4xl font-bold mb-10 lg:mb-16 text-gray-800">Level up with online interview prep</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -71,7 +71,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
+
       <section className="bg-[#be5959] text-gray-800 text-center py-12 lg:py-16 px-6 lg:px-[5%]">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-10 text-white">Our Impact</h2>
@@ -83,13 +83,13 @@ function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+  
       <div className="py-16 lg:py-20 px-6 flex flex-col items-center justify-center ">
         <h1 className="text-3xl lg:text-4xl font-bold mb-10 text-gray-800">Our Services</h1>
         <Cards />
       </div>
 
-      {/* Testimonials Section */}
+      
       <section className="py-16 lg:py-20 px-6 lg:px-[5%] bg-white flex justify-center">
         <div className="max-w-[800px] text-center">
           <h2 className="text-3xl lg:text-4xl mb-8 text-gray-800">Success Stories</h2>

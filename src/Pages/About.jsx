@@ -14,7 +14,7 @@ function About() {
 
   return (
     <div className="font-sans">
-      {/* Hero Section */}
+    
       <section className="bg-gradient-to-b from-blue-50 to-white py-20 px-6 lg:px-16 lg:pt-52 min-h-screen">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-10">
@@ -43,7 +43,7 @@ function About() {
         </div>
       </section>
 
-      {/* Our Story Section */}
+     
       <section className="py-20 px-6 lg:px-16 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -85,7 +85,7 @@ function About() {
         </div>
       </section>
 
-      {/* Commitments Section */}
+      
       <section className="py-20 px-6 lg:px-16 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -106,7 +106,7 @@ function About() {
         </div>
       </section>
 
-      {/* Team Section */}
+     
       <section className="py-20 px-6 lg:px-16 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -129,7 +129,7 @@ function About() {
         </div>
       </section>
 
-      {/* Impact Section */}
+
       <section className="py-20 px-6 lg:px-16 bg-[#be5959] text-white">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Impact</h2>
@@ -144,7 +144,7 @@ function About() {
         </div>
       </section>
 
-      {/* CTA Section */}
+     
       <section className="py-20 px-6 lg:px-16 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">

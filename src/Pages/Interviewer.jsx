@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import { ChevronRight } from 'lucide-react';
 
-// ...imports remain unchanged...
+
 
 function Interviewer() {
   const { speciality } = useParams();
@@ -26,10 +26,10 @@ function Interviewer() {
 
   return (
     <div className="mt-28 mx-4 md:mx-8 flex flex-col md:flex-row gap-6 mb-20 md:mb-32">
-      {/* Sidebar */}
+      
       <CategorySidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
 
-      {/* Interviewers List */}
+     
       <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {filteredInterviewers.length > 0 ? (
           filteredInterviewers.map((item) => (
