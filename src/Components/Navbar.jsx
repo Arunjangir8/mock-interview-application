@@ -16,7 +16,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Update token when localStorage changes (in same or other tabs)
+  // Update token when localStorage changes 
   useEffect(() => {
     const syncToken = () => {
       setToken(localStorage.getItem("token"));
@@ -26,7 +26,7 @@ const Navbar = () => {
     return () => window.removeEventListener("storage", syncToken);
   }, []);
 
-  // Also check token on mount (or every route change)
+  // Also check token on mount 
   useEffect(() => {
     const tokenCheck = () => {
       const storedToken = localStorage.getItem("token");
@@ -35,7 +35,7 @@ const Navbar = () => {
       }
     };
 
-    const interval = setInterval(tokenCheck, 500); // Poll every 500ms
+    const interval = setInterval(tokenCheck, 500); 
     return () => clearInterval(interval);
   }, [token]);
 

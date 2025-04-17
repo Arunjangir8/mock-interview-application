@@ -117,14 +117,14 @@ function About() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <TeamMember name="Alex Morgan" role="Founder & CEO" image={assets.img1} />
-            <TeamMember name="James Wilson" role="CTO" image={assets.img2} />
-            <TeamMember name="Sarah Chen" role="Head of Content" image={assets.img3} />
-            <TeamMember name="Miguel Rodriguez" role="Lead Developer" image={assets.img4} />
-            <TeamMember name="Priya Patel" role="UX Designer" image={assets.img5} />
-            <TeamMember name="David Kim" role="Career Expert" image={assets.img6} />
-            <TeamMember name="Emma Watson" role="AI Specialist" image={assets.img7} />
-            <TeamMember name="Thomas Greene" role="Marketing Director" image={assets.img8} />
+            <TeamMember name="Alex Morgan" role="Founder & CEO" image={"https://plus.unsplash.com/premium_photo-1669688174637-92ff26cc0a9b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHJhbmRvbSUyMHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D"} />
+            <TeamMember name="James Wilson" role="CTO" image={"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJhbmRvbSUyMHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D"} />
+            <TeamMember name="Sarah Chen" role="Head of Content" image={"https://images.unsplash.com/photo-1485206412256-701ccc5b93ca?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fHJhbmRvbSUyMHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D"} />
+            <TeamMember name="Miguel Rodriguez" role="Lead Developer" image={"https://plus.unsplash.com/premium_photo-1733980462889-ec95189661fb?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTM3fHxyYW5kb20lMjBwZXJzb258ZW58MHx8MHx8fDA%3D"} />
+            <TeamMember name="Priya Patel" role="UX Designer" image={"https://plus.unsplash.com/premium_photo-1663089885615-b70cae51c5da?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ5fHxyYW5kb20lMjBwZXJzb258ZW58MHx8MHx8fDA%3D"} />
+            <TeamMember name="David Kim" role="Career Expert" image={"https://images.unsplash.com/photo-1671506539198-b4824d36f0e8?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg0fHxyYW5kb20lMjBwZXJzb258ZW58MHx8MHx8fDA%3D"} />
+            <TeamMember name="Emma Watson" role="AI Specialist" image={"https://images.unsplash.com/photo-1557855765-c61eaa53c3ee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTgyfHxyYW5kb20lMjBwZXJzb258ZW58MHx8MHx8fDA%3D"} />
+            <TeamMember name="Thomas Greene" role="Marketing Director" image={"https://images.unsplash.com/photo-1516522973472-f009f23bba59?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg3fHxyYW5kb20lMjBwZXJzb258ZW58MHx8MHx8fDA%3D"} />
           </div>
         </div>
       </section>
